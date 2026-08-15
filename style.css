@@ -1,4 +1,5 @@
-body{ 
+
+*, *::before, *::after { box-sizing: border-box; }body{ 
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     text-align: center;
     box-sizing: border-box;
@@ -16,18 +17,27 @@ body{
     border-radius: 20px;
 }
 .output{
-    width: 380px;
+    display: flex;
+    width: 90%;
+    justify-content: end;
+    align-items: center;
     height: 100px;
     background-color: black;
-    border-radius: 20px;
     margin-top: 10px;
+    border-radius: 20px;
+}
+.output p{
+    color: white;
+    font-size: 60px;
+    margin: 0px 15px 0px 0px;
 }
 .flex-container{
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     background-color: rgb(29, 29, 29);
-    width: 360px;
-    height: 740px;
+    padding: 10px;
+    border-radius: 20px;
 }
 .numbers, .operators{
     display: flex;
@@ -36,26 +46,41 @@ body{
 .numbers{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     align-content: start;
-    width: 260px;
-    margin-top: 5px;
+    width: 250px;
     height: 100px;
+    text-align: center;
 }
 
 .numClass{
     color: white;
     background-color:rgb(63, 63, 63);
-    padding: 5px 23px;
+    padding: 10px 30px;
     margin: 2px;
     border-radius: 25px;
     flex-wrap: wrap;
-    width: 20px;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+}
+.numClass:hover{
+    background-color: rgb(122, 122, 122);
+}
+.operatorClass:hover{
+    background-color:rgb(255, 190, 68);
+}
+#del{
+    padding: 10px 23px;
+}
+#point{
+    padding: 10px 33px;
 }
 .operatorClass{
     color: white;
     background-color:rgb(255, 166, 0);
-    padding: 5px 20px;
+    padding: 5px 30px;
     margin: 2px;
-    border-radius: 30px;
+    border-radius: 25px;
 }
