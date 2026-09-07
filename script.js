@@ -84,44 +84,77 @@ function equalsOperator(){
         return newParagraph.textContent = displayArr.join(" ");
     }
 }
-// event listener for whole calc so that i dont have to put one for each num and opp
-calculator.addEventListener("click", (event) => {
-// checks and assigns to button whatever was just clicked
-    const button = event.target.closest(".numClass, .operatorClass");
-// stops the process if a button wasn't clicked because it will still activate if the container was clicked
-    if (!button) return;
-    //makes the delete button work
-    if(button.id === "del"){
-        displayArr = ["", "", ""];
-        arr = [];
-        newParagraph.textContent = "";
-        return;
-    }
-    //makes the equals button work
-    else if(button.id === "equals"){
-        equalsOperator();
-        return;
-    }
 
-//removes any extra spacing the it may have accidentally assigned to the button var
-    const value = button.textContent.trim();
-// if it is an operator that was clicked it will make sure that it gets assigned correctly
-    if(button.classList.contains("operatorClass")){
-        displayArr[1] = value;
-        console.log(displayArr);
-    }
-    else{
-        if(displayArr[1])
-        {
-            displayArr[2] += value;
+    function handleInput(button){
+        //makes the delete button work
+        if(button.id === "del"){
+            displayArr = ["", "", ""];
+            arr = [];
+            newParagraph.textContent = "";
+            return;
+        }
+        //makes the equals button work
+        else if(button.id === "equals"){
+            equalsOperator();
+            return;
+        }
+
+    //removes any extra spacing the it may have accidentally assigned to the button var
+        const value = button.textContent.trim();
+    // if it is an operator that was clicked it will make sure that it gets assigned correctly
+        if(button.classList.contains("operatorClass")){
+            displayArr[1] = value;
+            console.log(displayArr);
         }
         else{
-            displayArr[0] += value;
+            if(displayArr[1])
+            {
+                displayArr[2] += value;
+            }
+            else{
+                displayArr[0] += value;
+            }
+            console.log(value);
         }
-        console.log(value);
-    }
 
-newParagraph.textContent = displayArr.join(" ");
-if (!output.contains(newParagraph)) output.appendChild(newParagraph);
-})
-console.log(1.5 + 2.5);
+    newParagraph.textContent = displayArr.join(" ");
+    if (!output.contains(newParagraph)) output.appendChild(newParagraph);
+}
+    calculator.addEventListener("click", (event) => {
+    // checks and assigns to button whatever was just clicked
+        const button = event.target.closest(".numClass, .operatorClass");
+    // stops the process if a button wasn't clicked because it will still activate if the container was clicked
+        if (!button) return;
+        handleInput(button);
+    })
+    // event listener for whole calc so that i dont have to put one for each num and opp
+
+document.addEventListener("keydown", (event) => {
+    const keyToId = {
+        "0": "zero",
+        "1": "one",
+        "2": "two",
+        "3": "three",
+        "4": "four",
+        "5": "five",
+        "6": "six",
+        "7": "seven",
+        "8": "eight",
+        "9": "nine",
+        ".": "point",
+        "+": "plus",
+        "-": "minus",
+        "*": "multiply",
+        "/": "divide",
+        "Enter": "equals",
+        "=": "equals",
+        "Backspace": "del",
+        "Delete": "del"
+    };
+
+    const buttonId = keyToId[event.key];
+    if (!buttonId) return;
+
+    event.preventDefault();
+    handleInput(document.getElementById(buttonId));
+});
